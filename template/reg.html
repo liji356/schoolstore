@@ -1,0 +1,144 @@
+{% load static %}
+{% block body %}
+{% include 'header.html' %}
+<script>
+    var subjectObject = {
+      "Bcom": {
+        "Account": ["order", "Return" ],
+        "Bussiness Management": ["order", "Return" ],
+        "business Economics": ["order", "Return", ]    
+      },
+      "MBA": {
+        "Digital Marketing": ["order", "Return" ],
+        "Data Analytics": ["order", "Return" ],
+        "Finace":["order", "Return" ],
+        "HR Department":["order", "Return" ]
+      },
+      "MCOM": {
+        "Account": ["order", "Return" ],
+        "Bussiness Management": ["order", "Return" ],
+        "business Economics": ["order", "Return", ]    
+      },
+    }
+    window.onload = function() {
+      var subjectSel = document.getElementById("subject");
+      var topicSel = document.getElementById("topic");
+      var chapterSel = document.getElementById("chapter");
+      for (var x in subjectObject) {
+        subjectSel.options[subjectSel.options.length] = new Option(x, x);
+      }
+      subjectSel.onchange = function() {
+        //empty Chapters- and Topics- dropdowns
+        chapterSel.length = 1;
+        topicSel.length = 1;
+        //display correct values
+        for (var y in subjectObject[this.value]) {
+          topicSel.options[topicSel.options.length] = new Option(y, y);
+        }
+      }
+      topicSel.onchange = function() {
+        //empty Chapters dropdown
+        chapterSel.length = 1;
+        //display correct values
+        var z = subjectObject[subjectSel.value][this.value];
+        for (var i = 0; i < z.length; i++) {
+          chapterSel.options[chapterSel.options.length] = new Option(z[i], z[i]);
+        }
+      }
+    }
+   
+    </script>
+    <script type="text/javascript">
+      function fun()
+      {
+        alert("order Confirmed")
+      }
+
+    </script>
+<div class="container-fluid bg-registration py-5" style="margin: 90px 0;">
+        <div class="container py-5">
+            <div class="row align-items-center">
+            
+                    <div class="card border-0">
+                        <div class="card-header bg-light text-center p-4">
+                            <h1 class="m-0">Register Form</h1>
+                        </div>
+                        <div class="card-body rounded-bottom bg-dark">
+                            <form method="POST">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label  style="color: white;">Name:</label>
+                                    <input type="text"  name="name" class="form-control border-0 p-4" placeholder="Your name"  />
+                                </div>
+                                <div class="form-group">
+                                    <label style="color: white;">DOB:</label>
+                                    <input type="date" name="dob" class="form-control border-0 p-4"   />
+                                </div>
+                                <div class="form-group">
+                                    <label  style="color: white;">Age:</label>
+                                    <input type="text" name="age" class="form-control border-0 p-4" placeholder="Your Age" />
+                                </div>
+                                <div class="form-group">
+                                    <label  style="color: white;" name="gender">Gender:</label>
+                                    <input type="radio"   name="gender" value="male">Male
+                                    <input type="radio"   name="gender" value="female">Female
+                                </div>
+                                <div class="form-group">
+                                    <label  style="color: white;">Phone Number:</label>
+                                    <input type="text" name="phonenumber" class="form-control border-0 p-4" placeholder="Your Phone number" maxlength="12" />
+                                </div>
+                                <div class="form-group">
+                                    <label  style="color: white;">Mail Id:</label>
+                                    <input type="email" name="mailid" class="form-control border-0 p-4" placeholder="Your email id"   />
+                                </div>
+                                <div class="form-group">
+                                  <label style="color: white;">Address:</label>
+                              <textarea name="address" rows="2" cols="20" class="form-control border-0 p-4"></textarea>
+                                      </div>
+                                <div class="form-group">
+                                   <label style="color: white;" >Department:</label>
+    
+                        <select name="department" id="subject">
+                        <option value="" selected="selected">Select department</option>
+                                </select>
+                                <br>
+                                <br>
+                                <label style="color: white;">Courses:</label>
+    <select name="course" id="topic">
+        <option value="" selected="selected"> select subject to want</option>
+      </select>
+      <br>
+      <br>
+      <label style="color: white;">Purpose</label>
+      <select name="purpose" id="chapter">
+      <option value="" selected="selected">Please select what u want?</option>
+    </select>
+    <br>
+    <br>
+    <div class="form-group">
+        <label  style="color: white;">Material Provide:</label>
+        <input type="checkbox"  name="material" value="Pen" >Pen
+        <input type="checkbox" name="material" value="papper" >Papper
+    </div>
+      
+
+                         </div>
+                                <div>
+<button class="btn btn-light btn-block border-0 py-3" onclick="fun()" type="submit">Sign Up Now</button>
+                                </div>
+                                <br>
+                                <div>
+  <button class="btn btn-light btn-block border-0 py-3"  type="submit"><a href="/logout">Logout</button></a>
+
+                                                                  </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+{% include 'footer.html' %}
