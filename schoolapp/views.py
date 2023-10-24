@@ -13,13 +13,13 @@ def login(request):
         username=request.POST['username']
         password=request.POST['password']
         user=auth.authenticate(username=username,password=password)
-        if User.objects.filter(username=username).exists():
-            messages.info(request,"username taken")
+        if user is not None:
+            auth.login(request,user)
+            user.save()
             return redirect('/reg')
-       
-        elif User.objects.filter(password=password).exists():
-            messages.info(request,"password taken")
-            return redirect('/reg')
+        else:
+            messages.info(request,"invalid")
+            return redirect('login')
     return render(request,"login.html")
 
 #reg part#
@@ -38,7 +38,7 @@ def reg(request):
         material=request.POST.get('material',)
         school=Form(name=name,dob=dob,age=age,gender=gender,phonenumber=phonenumber,mailid=mailid,address=address,department=department,course=course)
         school.save()
-        return redirect('/')
+        return redirect('/login')
    
     return render(request,'reg.html')
 

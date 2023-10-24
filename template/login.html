@@ -16,15 +16,17 @@
                         <form method="POST">
                             {% csrf_token %}
                             <div class="form-group">
-                                <input type="text" class="form-control border-0 p-4" name="username" placeholder="Your name" required="required" />
+                                <input type="text" class="form-control border-0 p-4" name="username" placeholder="Your name"  required="required" />
                             </div>
                             <div class="form-group">
-                                <input type="password" class="form-control border-0 p-4" name="password" placeholder="Your password" required="required" />
+                                <input type="password" class="form-control border-0 p-4" name="password" placeholder="Your password" required="required"  />
                             </div>
                             
                             <div>
                                 <button class="btn btn-info btn-block border-0 py-3" type="submit"><a href="/reg" >Login</button></a> 
                             </div>
+                            <br>
+                            
                             <div>
                                 <p style="color: white;">No Account?<a href="/reg2">Sign Up...</a></p>
                             </div>

@@ -105,9 +105,20 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav py-0">
+                            
                             <a href="/" class="nav-item nav-link active">Home</a>
-                            <a href="/login" class="nav-item nav-link">Login</a>
-                            <a href="/reg2" class="nav-item nav-link">Register</a>
+                            {% if user.is_authenticated %}
+									<li>{{user.username}}</li>
+									<a href="/logout" class="nav-item nav-link active">Logout</a>
+									{% else %}
+
+                                    <a href="/login" class="nav-item nav-link active">Login</a>
+                                    <a href="/reg2" class="nav-item nav-link active">Register</a>
+									
+									
+								</ul>
+								{% endif %}
+                          
 
                            
                             
